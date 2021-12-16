@@ -1,0 +1,43 @@
+apiVersion: v1
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>This is APP 2 VERSION</title>
+    </head>
+    <body>
+    <h1>APP VERSION 2</h1>
+    <p>My first application</p>
+    </body>
+    </html>
+kind: ConfigMap
+metadata:
+  name: app2-index
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jkapp
+  name: app2-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jkapp
+  template:
+    metadata:
+      labels:
+        app: jkapp
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+        volumeMounts:
+        - name: app-content-vol
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: app-content-vol
+        configMap:
+          name: app2-index
