@@ -1,19 +1,19 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: jkapp-virtual-service
+  name: webserver-virtual-service
 spec:
   hosts:
-  - jkapp
+  - webserver-svc
   gateways:
-  - jkapp-gateway
+  - webserver--gateway
   http:
   - route:
     - destination:
-        host: jkapp
+        host: webserver
         subset: v1
       weight: 1
     - destination:
-        host: jkapp
+        host: webserver
         subset: v2
       weight: 99

@@ -20,17 +20,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: jkapp
+    app: webserver
   name: app1-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jkapp
+      app: webserver
   template:
     metadata:
       labels:
-        app: jkapp
+        app: webserver
     spec:
       containers:
       - image: nginx:latest

@@ -1,9 +1,9 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: jkapp-destination
+  name: webserver-destination
 spec:
-  host: jkapp
+  host: webserver-svc
   trafficPolicy:
     loadBalancer:
       simple: ROUND_ROBIN
