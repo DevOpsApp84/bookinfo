@@ -1,0 +1,13 @@
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: sample-postgres
+  labels:
+    app: sample-postgres
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+  selector:
+    app: sample-postgres
+    tier: postgres
