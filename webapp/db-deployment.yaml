@@ -1,28 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-postgres
+  name: db
   labels:
-    app: sample-postgres
+    app: db
 spec:
   selector:
     matchLabels:
-      app: sample-postgres
-      tier: postgres
+      app: db
+      tier: backend
   replicas: 1
   template:
     metadata:
       labels:
-        app: sample-postgres
-        tier: postgres
+        app: db
+        tier: backend
     spec:
       containers:
         - image: postgres:latest
-          name: postgres
-          imagePullPolicy: "IfNotPresent"
+          name: postgress
           envFrom:
             - secretRef:
-                name: postgres-secret
+                name: db-secret
           ports:
             - containerPort: 5432
               name: postgres
@@ -32,7 +31,7 @@ spec:
       volumes:
         - name: postgres-persistent-storage
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: db-pv-claim
 
 
 

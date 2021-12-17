@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  sqlInject.sql: "CREATE DATABASE sample;\nCREATE TABLE userinfo (\n\tid SERIAL PRIMARY
+    KEY,\n\tAge INT,\n\tEmail TEXT UNIQUE NOT NULL,\n\tFirstname TEXT,\n\tLastname
+    TEXT\n);\nINSERT INTO userinfo (Age, Email, Firstname, Lastname) VALUES\n(20,'test1@example.com','Mario','Bross'),\n(23,'test2@example.com','Lugi','Fider');\n"
+kind: ConfigMap
+metadata:
+  name: initdb-cm-sql

@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-db
+spec:
+  template:
+    metadata:
+      name:  init-db
+      labels:
+        app: init-db
+    spec:
+      containers:
+      - image: "postgres:latest"
+        name: init-db
+        command: [ "bin/sh", "-c", "psql -a -f /sqlInject.sql" ]
+        volumeMounts:
+        - name: sqlInject
+          mountPath: /sqlInject.sql
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: DB_HOST
+
+        - name: POSTGRESS_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRESS_USER
+
+        - name: POSTGRESS_PASS
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRESS_PASS
+      volumes:
+        - name: sqlInject
+          configMap:
+            name: initdb-cm-sql
+      restartPolicy: OnFailure
