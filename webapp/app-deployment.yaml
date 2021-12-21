@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: app
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: app
+        tier: frontend
+    spec:
+      #initContainers:
+      #- image: ghcr.io/devopsapp84/sample-apps/webapp:1.0
+        #name: pglibs
+        #command: ["sh","-c","go get -u github.com/lib/pq"]
+      containers:
+      - image: ghcr.io/devopsapp84/sample-apps/application:1.7
+        imagePullPolicy: Always
+        name: webapp
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PORT
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_DB
+        command: ["sh", "-c", "/webapp $DB_HOST $DB_PORT $POSTGRES_USER $POSTGRES_PASSWORD $POSTGRES_DB"]
+        ports:
+        - containerPort: 8080
+          name: tcp-webapp
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /store
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 3

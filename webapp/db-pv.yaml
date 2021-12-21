@@ -13,4 +13,4 @@ spec:
     - ReadWriteMany
   hostPath:
     path: "/mnt/data"
-  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Delete

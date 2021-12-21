@@ -1,41 +1,55 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: init-db
+  name: initdb
 spec:
+  completions: 1
   template:
     metadata:
-      name:  init-db
+      name:  initdb
       labels:
-        app: init-db
+        app: init
+      annotations:
+        sidecar.istio.io/inject: "false"
     spec:
       containers:
-      - image: "postgres:latest"
-        name: init-db
-        command: [ "bin/sh", "-c", "psql -a -f /sqlInject.sql" ]
+      - image: "postgres:10.1" 
+        name: initialize
+        command: 
+        - /bin/sh
+        - -c 
+        - |
+            sleep 30
+            export PGPASSWORD=$POSTGRES_PASSWORD
+            psql -U $POSTGRES_USER -h $DB_HOST -d $POSTGRES_DB -f /load/initdb.sql
+            exit 0
         volumeMounts:
-        - name: sqlInject
-          mountPath: /sqlInject.sql
+        - name: sqlinit
+          mountPath: /load
         env:
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: db-secret
               key: DB_HOST
-
-        - name: POSTGRESS_USER
+        - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
-              key: POSTGRESS_USER
-
-        - name: POSTGRESS_PASS
+              name: db-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
-              key: POSTGRESS_PASS
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_DB
+      restartPolicy: Never  
       volumes:
-        - name: sqlInject
+        - name: sqlinit
           configMap:
             name: initdb-cm-sql
-      restartPolicy: OnFailure
+

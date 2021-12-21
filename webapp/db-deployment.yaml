@@ -17,11 +17,11 @@ spec:
         tier: backend
     spec:
       containers:
-        - image: postgres:latest
+        - image: postgres:10.1
           name: postgress
           envFrom:
-            - secretRef:
-                name: db-secret
+          - secretRef:
+              name: db-secret
           ports:
             - containerPort: 5432
               name: postgres
@@ -32,6 +32,3 @@ spec:
         - name: postgres-persistent-storage
           persistentVolumeClaim:
             claimName: db-pv-claim
-
-
-
