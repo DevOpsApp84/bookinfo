@@ -9,10 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Login to docker registry
-      run: echo "test"
-    - name: List images
-      run: docker image list
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build the Docker image for webapp v1
       run: |
         ls ${{ github.workspace }}
@@ -20,5 +22,3 @@ jobs:
         ls -la
         #docker build -f Dockerfile-v1  -t ghcr.io/${{ github.repository }}/webapp:v1_latest
         #docker build -f Dockerfile-v1  -t ghcr.io/${{ github.repository }}/webapp:v1_latest
-
-
