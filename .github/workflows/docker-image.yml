@@ -15,10 +15,15 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build the Docker image for webapp v1
-      run: |
-        ls ${{ github.workspace }}
-        cd webapp/src
-        ls -la
-        #docker build -f Dockerfile-v1  -t ghcr.io/${{ github.repository }}/webapp:v1_latest
-        #docker build -f Dockerfile-v1  -t ghcr.io/${{ github.repository }}/webapp:v1_latest
+    - name: Build and push webapp v1
+      uses: docker/build-push-action@v2
+      with:
+        context: webapp/src/v1
+        push: true
+        tags: v1_latest
+    - name: Build and push webapp v2
+      uses: docker/build-push-action@v2
+      with:
+        context: webapp/src/v2
+        push: true
+        tags: v2_latest
