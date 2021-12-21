@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: initdb
+spec:
+  completions: 1
+  template:
+    metadata:
+      name:  initdb
+      labels:
+        app: init
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      containers:
+      - image: "postgres:10.1" 
+        name: initialize
+        command: 
+        - /bin/sh
+        - -c 
+        - |
+            sleep 30
+            export PGPASSWORD=$POSTGRES_PASSWORD
+            psql -U $POSTGRES_USER -h $DB_HOST -d $POSTGRES_DB -f /load/initdb.sql
+            exit 0
+        volumeMounts:
+        - name: sqlinit
+          mountPath: /load
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_HOST
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_DB
+      restartPolicy: Never  
+      volumes:
+        - name: sqlinit
+          configMap:
+            name: initdb-cm-sql
+
