@@ -37,5 +37,5 @@ jobs:
         with:
           context: webapp/src/v1
           push: true
-          tags: "${{ GITHUB_SERVER_URL }}/${{GITHUB_REPOSITORY }}/webapp:${{ GITHUB_REF_NAME }}"
+          tags: ghcr.io/${{GITHUB_REPOSITORY }}/webapp:${{ GITHUB_REF_NAME }}
           labels: ${{ steps.meta.outputs.labels }}
