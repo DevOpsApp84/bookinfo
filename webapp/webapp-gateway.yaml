@@ -20,7 +20,7 @@ metadata:
   name: webapp
 spec:
   hosts:
-  - "wapp.k8s.test.com"
+  - "app.k8s.test.com"
   gateways:
   - webapp-gateway
   http:
