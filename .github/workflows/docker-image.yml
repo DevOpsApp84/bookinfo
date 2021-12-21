@@ -37,5 +37,5 @@ jobs:
         with:
           context: webapp/src/v1
           push: true
-          tags: ${{ env.GITHUB_REPOSITORY }}/webapp:${{ env.GITHUB_REF }}
+          tags: ${{ env.GITHUB_REPOSITORY }}/webapp:latest
           labels: ${{ steps.meta.outputs.labels }}
