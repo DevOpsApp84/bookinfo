@@ -1,7 +1,7 @@
 name: Docker Image CI Build
 on:
   push:
-    branches: [ main ]
+    branches: [ webapp ]
   pull_request:
     branches: [ webapp ]
 jobs:
@@ -9,6 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
+    - name: Login to docker registry
+      run: echo "test"
+    - name: List images
+      run: docker image list
+    - name: Build the Docker image for webapp v1
       run: |
         ls ${{ github.workspace }}
+        cd webapp/src
+        ls -la
+        #docker build -f Dockerfile-v1  -t ghcr.io/${{ github.repository }}/webapp:v1_latest
+        #docker build -f Dockerfile-v1  -t ghcr.io/${{ github.repository }}/webapp:v1_latest
+
+
