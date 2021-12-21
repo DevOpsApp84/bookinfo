@@ -12,7 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "webapp.k8s.test.com"
+    - "app.k8s.test.com"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -20,7 +20,7 @@ metadata:
   name: webapp
 spec:
   hosts:
-  - "webapp.k8s.test.com"
+  - "wapp.k8s.test.com"
   gateways:
   - webapp-gateway
   http:
