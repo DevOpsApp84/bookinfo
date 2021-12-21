@@ -59,7 +59,7 @@ http.ListenAndServe(":8080", nil)
 
 func storeIndex(w http.ResponseWriter, r *http.Request) {
 
-fmt.Fprintf(w, "APP VERSION: 2")
+fmt.Fprintf(w, "APP VERSION: 2\n\n\n")
 fmt.Fprintf(w, "Cool, your connected to the browser \n")
 
 if r.Method != "GET" {
@@ -95,6 +95,6 @@ return
 }
 
 for _, usr := range usrs {
-fmt.Fprintf(w, "%d %d %s %s %s\n", usr.id, usr.Age, usr.Email, usr.Firstname)
+fmt.Fprintf(w, "%d %d %s %s\n", usr.id, usr.Age, usr.Email, usr.Firstname)
 }
 }

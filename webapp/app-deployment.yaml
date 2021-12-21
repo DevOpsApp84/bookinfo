@@ -23,7 +23,7 @@ spec:
         #name: pglibs
         #command: ["sh","-c","go get -u github.com/lib/pq"]
       containers:
-      - image: ghcr.io/devopsapp84/sample-apps/webapp:v1
+      - image: ghcr.io/devopsapp84/sample-apps/webapp:v1_1_0
         imagePullPolicy: Always
         name: webapp
         env:
@@ -93,7 +93,7 @@ spec:
         #name: pglibs
         #command: ["sh","-c","go get -u github.com/lib/pq"]
       containers:
-      - image: ghcr.io/devopsapp84/sample-apps/webapp:v2
+      - image: ghcr.io/devopsapp84/sample-apps/webapp:v2_1_0
         imagePullPolicy: Always
         name: webapp
         env:
