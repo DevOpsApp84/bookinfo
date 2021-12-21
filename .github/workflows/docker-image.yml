@@ -37,4 +37,5 @@ jobs:
         with:
           context: webapp/src/v1
           push: true
-          tags: devopsapp84/sample-apps/webapp:latest
+          tags: ghcr.io/devopsapp84/sample-apps/webapp:test
+          labels: ${{ steps.meta.outputs.labels }}
