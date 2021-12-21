@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"name":"my-webserver","namespace":"sample-apps05"},"spec":{"gateways":["my-webserver-app"],"hosts":["app.k8s.test.com"],"tls":[{"match":[{"port":443,"sniHosts":["app.k8s.test.com"]}],"route":[{"destination":{"host":"my-webserver","port":{"number":443}}}]}]}}
+  creationTimestamp: "2021-12-21T14:31:15Z"
+  generation: 1
+  name: my-webserver
+spec:
+  gateways:
+  - my-webserver-app
+  hosts:
+  - app.k8s.test.com
+  tls:
+  - match:
+    - port: 443
+      sniHosts:
+      - app.k8s.test.com
+    route:
+    - destination:
+        host: my-webserver
+        port:
+          number: 443

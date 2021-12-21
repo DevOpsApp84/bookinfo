@@ -1,7 +1,56 @@
+apiVersion: v1
+data:
+  DB_HOST: ZGItc3Zj
+  DB_PASSWORD: aW5pdDEyMzQ=
+  DB_PORT: NTQzMg==
+  DB_USER: YXBw
+  DB_TABLE: aW5mbwo=
+  POSTGRES_DB: c2FtcGxl
+  POSTGRES_PASSWORD: aW5pdDEyMzQ=
+  POSTGRES_USER: cG9zdGdyZXM=
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: db-secret
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
+  name: db
+  labels:
+    app: db
+spec:
+  selector:
+    matchLabels:
+      app: db
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db
+        tier: backend
+    spec:
+      containers:
+        - image: postgres:10.1
+          name: postgress
+          envFrom:
+          - secretRef:
+              name: db-secret
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-persistent-storage
+      volumes:
+        - name: postgres-persistent-storage
+          persistentVolumeClaim:
+            claimName: db-pv-claim
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   labels:
     app: app
     version: v1
@@ -18,10 +67,6 @@ spec:
         app: app
         tier: frontend
     spec:
-      #initContainers:
-      #- image: ghcr.io/devopsapp84/sample-apps/webapp:1.0
-        #name: pglibs
-        #command: ["sh","-c","go get -u github.com/lib/pq"]
       containers:
       - image: ghcr.io/devopsapp84/sample-apps/webapp:v1_1_0
         imagePullPolicy: Always
@@ -88,10 +133,6 @@ spec:
         app: app
         tier: frontend
     spec:
-      #initContainers:
-      #- image: ghcr.io/devopsapp84/sample-apps/webapp:1.0
-        #name: pglibs
-        #command: ["sh","-c","go get -u github.com/lib/pq"]
       containers:
       - image: ghcr.io/devopsapp84/sample-apps/webapp:v2_1_0
         imagePullPolicy: Always

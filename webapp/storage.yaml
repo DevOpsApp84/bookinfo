@@ -14,3 +14,17 @@ spec:
   hostPath:
     path: "/mnt/data"
   persistentVolumeReclaimPolicy: Delete
+---
+apiVersion: v1
+kind: PersistentVolumeClaim 
+metadata:
+  name: db-pv-claim
+  labels:
+    app: db
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteMany 
+  resources:
+    requests:
+      storage: 5Gi
