@@ -33,10 +33,10 @@ spec:
     spec:
       containers:
       - name: helloworld
+        image: ghcr.io/devopsapp84/sample-apps/helloworld:v1
         env:
         - name: SERVICE_VERSION
           value: "1"
-        image: ghcr.io/devopsapp84/sample-apps/helloworld:1.0 
         resources:
           requests:
             cpu: "100m"
@@ -65,10 +65,10 @@ spec:
     spec:
       containers:
       - name: helloworld
+        image: ghcr.io/devopsapp84/sample-apps/helloworld:v1
         env:
         - name: SERVICE_VERSION
           value: "2"
-        image: ghcr.io/devopsapp84/sample-apps/helloworld:1.0
         resources:
           requests:
             cpu: "100m"
