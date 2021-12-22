@@ -68,7 +68,7 @@ spec:
         tier: frontend
     spec:
       containers:
-              - image: ghcr.io/devopsapp84/sample-apps/webapp:v1
+      - image: ghcr.io/devopsapp84/sample-apps/webapp:v1
         imagePullPolicy: Always
         name: webapp
         env:
@@ -134,7 +134,7 @@ spec:
         tier: frontend
     spec:
       containers:
-              - image: ghcr.io/devopsapp84/sample-apps/webapp:v2
+      - image: ghcr.io/devopsapp84/sample-apps/webapp:v2
         imagePullPolicy: Always
         name: webapp
         env:
