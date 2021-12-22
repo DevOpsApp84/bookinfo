@@ -37,7 +37,7 @@ jobs:
         with:
           context: webapp/src/v1
           push: true
-          tags: ${{ steps.meta.outputs.tags }}_${{ GITHUB_REF }}
+          tags: ${{ steps.meta.outputs.tags }}_${{ env.GITHUB_REF }}
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Build and push Docker image webapp
@@ -45,7 +45,7 @@ jobs:
         with: 
           context: webapp/src/v2
           push: true 
-          tags: ${{ steps.meta.outputs.tags }}_${{ GITHUB_REF }}
+          tags: ${{ steps.meta.outputs.tags }}_${{ env.GITHUB_REF }}
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Build and push Docker image helloworld
@@ -53,5 +53,5 @@ jobs:
         with: 
           context: helloworld/src
           push: true 
-          tags: ${{ steps.meta.outputs.tags }}_${{ GITHUB_REF }}
+          tags: ${{ steps.meta.outputs.tags }}_${{ env.GITHUB_REF }}
           labels: ${{ steps.meta.outputs.labels }}
