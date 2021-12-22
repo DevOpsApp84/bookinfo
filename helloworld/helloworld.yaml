@@ -34,15 +34,15 @@ spec:
       containers:
       - name: helloworld
         image: ghcr.io/devopsapp84/sample-apps/helloworld:v1
+        env:
+        - name: SERVICE_VERSION
+          value: "1"
         resources:
           requests:
             cpu: "100m"
         imagePullPolicy: IfNotPresent #Always
         ports:
         - containerPort: 5000
-        env:
-        - name: SERVICE_VERSION
-          value: 1 
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -66,12 +66,12 @@ spec:
       containers:
       - name: helloworld
         image: ghcr.io/devopsapp84/sample-apps/helloworld:v1
+        env:
+        - name: SERVICE_VERSION
+          value: "2"
         resources:
           requests:
             cpu: "100m"
         imagePullPolicy: IfNotPresent #Always
         ports:
         - containerPort: 5000
-        env:
-        - name: SERVICE_VERSION
-          value: 2
