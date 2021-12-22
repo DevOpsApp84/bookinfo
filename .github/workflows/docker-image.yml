@@ -35,20 +35,20 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and push Docker image webapp
+      - name: V1 - Build and push Docker image webapp
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: webapp/src/v1
           push: true
-          tags: ${{ steps.meta.outputs.tags }}_$GITHUB_RUN_NUMBER
+          tags: ${{ steps.meta.outputs.tags }}_v1
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Build and push Docker image webapp
+      - name: V2 - Build and push Docker image webapp
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with: 
           context: webapp/src/v2
           push: true 
-          tags: ${{ steps.meta.outputs.tags }}_$GITHUB_RUN_NUMBER
+          tags: ${{ steps.meta.outputs.tags }}_v2
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Build and push Docker image helloworld
@@ -56,5 +56,5 @@ jobs:
         with: 
           context: helloworld/src
           push: true 
-          tags: ${{ steps.meta.outputs.tags }}_$GITHUB_RUN_NUMBER
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
