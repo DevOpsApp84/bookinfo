@@ -1,4 +1,4 @@
-name: Create and publish a Docker image
+name: Create and publish a Docker images into ghcr.io
 
 on:
   push:
@@ -32,10 +32,26 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image webapp
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: webapp/src/v1
           push: true
-          tags: ghcr.io/${{ env.GITHUB_REPOSITORY }}/webapp:${{ env.GITHUB_REF_NAME }}
+          tags: ${{ steps.meta.outputs.tags }}_${{ GITHUB_REF }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Docker image webapp
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with: 
+          context: webapp/src/v2
+          push: true 
+          tags: ${{ steps.meta.outputs.tags }}_${{ GITHUB_REF }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Docker image helloworld
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with: 
+          context: helloworld/src
+          push: true 
+          tags: ${{ steps.meta.outputs.tags }}_${{ GITHUB_REF }}
           labels: ${{ steps.meta.outputs.labels }}
