@@ -37,7 +37,7 @@ jobs:
         with:
           context: webapp/src/v1
           push: true
-          tags: $REGISTRY/$IMAGE_NAME/webapp:v1
+          tags: ${{ REGISTRY }}/${{ IMAGE_NAME }}/webapp:v1
           labels: ${{ steps.meta.outputs.labels }}
 
           #- name: V2 - Build and push Docker image webapp
