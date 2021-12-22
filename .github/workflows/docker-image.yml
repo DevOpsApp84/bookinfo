@@ -40,18 +40,18 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/webapp:v1
           labels: ${{ steps.meta.outputs.labels }}
 
-          #- name: V2 - Build and push Docker image webapp
-          #uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-          #with: 
-          #context: webapp/src/v2
-          #push: true 
-          #tags: $REGISTRY/$IMAGE_NAME/webapp:v2
-          #labels: ${{ steps.meta.outputs.labels }}
+      - name: V2 - Build and push Docker image webapp
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with: 
+          context: webapp/src/v2
+          push: true 
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/webapp:v2
+          labels: ${{ steps.meta.outputs.labels }}
 
-          #- name: Build and push Docker image helloworld
-          #uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-          #with: 
-          # context: helloworld/src
-          # push: true 
-          # tags: $REGISTRY/$IMAGE_NAME/helloworld:latest
-          # labels: ${{ steps.meta.outputs.labels }}
+      - name: Build and push Docker image helloworld
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with: 
+          context: helloworld/src
+          push: true 
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/helloworld:v1
+          labels: ${{ steps.meta.outputs.labels }}
