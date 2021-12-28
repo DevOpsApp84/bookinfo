@@ -12,7 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "app.k8s.test.com"
+    - "lab.external.com"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -20,7 +20,7 @@ metadata:
   name: bookinfo
 spec:
   hosts:
-  - "app.k8s.test.com"
+  - "lab.external.com"
   gateways:
   - bookinfo-gateway
   http:
