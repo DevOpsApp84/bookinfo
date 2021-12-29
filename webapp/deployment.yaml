@@ -66,6 +66,7 @@ spec:
       labels:
         app: app
         tier: frontend
+        version: v1
     spec:
       containers:
       - image: ghcr.io/devopsapp84/sample-apps/webapp:v1
@@ -132,6 +133,7 @@ spec:
       labels:
         app: app
         tier: frontend
+        version: v2
     spec:
       containers:
       - image: ghcr.io/devopsapp84/sample-apps/webapp:v2

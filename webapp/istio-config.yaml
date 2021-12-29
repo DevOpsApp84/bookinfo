@@ -13,41 +13,43 @@ spec:
     hosts:
     - "app.external.com"
 ---
-#apiVersion: networking.istio.io/v1alpha3
-#kind: VirtualService
-#metadata:
-#  name: webapp
-#spec:
-#  hosts:
-#  - "app.external.com"
-#  gateways:
-#  - webapp-gateway
-#  http:
-#  - match:
-#    - uri:
-#        prefix: /store
-#    route:
-#    - destination:
-#        host: app-svc
-#        port:
-#          number: 8080
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: webapp
+spec:
+  host: app-svc.sample-apps03.svc.cluster.local
+  subsets:
+    - name: v1
+      labels:
+        version: v1
+    - name: v2
+      labels:
+        version: v2
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: webapp-70-30
+  name: webapp
 spec:
   hosts:
-  - webapp.sample-apps03.svc.cluster.local
+  - "app.external.com"
+  gateways:
+  - webapp-gateway
   http:
-  - name: webapp-v1-routes
+  - match:
+    - uri:
+        prefix: /store
     route:
-    - destination:
-        host: webapp.sample-apps03.svc.cluster.local
-        subset: v1
-      weight: 70
-  - name: webapp-v2-routes
-    route:
-    - destination:
-        host: webapp.sample-apps03.svc.cluster.local
-        subset: v2
-      weight: 30
+      - destination:
+          host: app-svc.sample-apps03.svc.cluster.local
+          port:
+            number: 8080
+          subset: v1
+        weight: 90
+      - destination:
+          host: app-svc.sample-apps03.svc.cluster.local
+          port:
+            number: 8080
+          subset: v2
+        weight: 10
