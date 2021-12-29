@@ -1,4 +1,3 @@
----
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
@@ -14,21 +13,41 @@ spec:
     hosts:
     - "app.external.com"
 ---
+#apiVersion: networking.istio.io/v1alpha3
+#kind: VirtualService
+#metadata:
+#  name: webapp
+#spec:
+#  hosts:
+#  - "app.external.com"
+#  gateways:
+#  - webapp-gateway
+#  http:
+#  - match:
+#    - uri:
+#        prefix: /store
+#    route:
+#    - destination:
+#        host: app-svc
+#        port:
+#          number: 8080
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: webapp
+  name: webapp-70-30
 spec:
   hosts:
-  - "app.external.com"
-  gateways:
-  - webapp-gateway
+  - webapp.sample-apps03.svc.cluster.local
   http:
-  - match:
-    - uri:
-        prefix: /store
+  - name: webapp-v1-routes
     route:
     - destination:
-        host: app-svc
-        port:
-          number: 8080
+        host: webapp.sample-apps03.svc.cluster.local
+        subset: v1
+      weight: 70
+  - name: webapp-v2-routes
+    route:
+    - destination:
+        host: webapp.sample-apps03.svc.cluster.local
+        subset: v2
+      weight: 30
