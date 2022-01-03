@@ -1,4 +1,0 @@
-# EXAMINE SERVICE
-```
-curl -v http://$INGRESS_SERVER:$INGRESS_PORT
-```
