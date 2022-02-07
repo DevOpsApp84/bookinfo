@@ -2,7 +2,7 @@ name: Create and publish a Docker images into ghcr.io
 
 on:
   push:
-    branches: ['dev']
+    branches: ['main']
 
 env:
   REGISTRY: ghcr.io
@@ -53,7 +53,7 @@ jobs:
         with: 
           context: app03
           push: true 
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app02:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app03:latest
           labels: ${{ steps.meta.outputs.labels }}
 
 
