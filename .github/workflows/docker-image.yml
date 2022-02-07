@@ -55,6 +55,7 @@ jobs:
           push: true 
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/helloworld:v1
           labels: ${{ steps.meta.outputs.labels }}
+
       - name: Build and push Docker image webapp v2
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc 
         with: 
@@ -62,3 +63,27 @@ jobs:
           push: true 
           tags: ${{ steps.meta.outputs.tags }} 
           labels: ${{ steps.meta.outputs.labels }}
+      
+      - name: Build and push Docker image app01
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc 
+        with: 
+          context: app01
+          push: true 
+          tags: ${{ steps.meta.outputs.tags }} 
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Docker image app02
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc 
+        with: 
+          context: app02
+          push: true 
+          tags: ${{ steps.meta.outputs.tags }} 
+          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build and push Docker image app03
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc 
+        with: 
+          context: app03
+          push: true 
+          tags: ${{ steps.meta.outputs.tags }} 
+          labels: ${{ steps.meta.outputs.labels }}
+
