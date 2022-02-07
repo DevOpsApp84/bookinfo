@@ -2,7 +2,7 @@ name: Create and publish a Docker images into ghcr.io
 
 on:
   push:
-    branches: ['webapp']
+    branches: ['main']
 
 env:
   REGISTRY: ghcr.io
