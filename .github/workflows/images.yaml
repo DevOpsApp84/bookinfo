@@ -78,3 +78,137 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta2.outputs.tags }}
           labels: ${{ steps.meta2.outputs.labels }}
+
+
+###
+# app03
+###      
+      - name: Extract metadata (tags, labels) for Docker app03
+        id: meta3
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app03
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Build and push Docker image app03
+        uses: docker/build-push-action@v2
+        with:
+          context: appcollection/app03
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta3.outputs.tags }}
+          labels: ${{ steps.meta3.outputs.labels }}
+
+###
+# APP04
+###
+      - name: Extract metadata (tags, labels) for Docker app04
+        id: meta4
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app04
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Build and push Docker image  app04
+        uses: docker/build-push-action@v2
+        with:
+          context: appcollection/app04
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta4.outputs.tags }}
+          labels: ${{ steps.meta4.outputs.labels }}
+
+###
+# APP05
+###
+      - name: Extract metadata (tags, labels) for Docker app05
+        id: meta5
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app05
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+      
+      - name: Build and push Docker image app05
+        uses: docker/build-push-action@v2
+        with:
+          context: appcollection/app05
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta5.outputs.tags }}
+          labels: ${{ steps.meta5.outputs.labels }}
+
+###
+# APP06
+###       
+      - name: Extract metadata (tags, labels) for Docker app06
+        id: meta6
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app06
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Build and push Docker image app06
+        uses: docker/build-push-action@v2
+        with:
+          context: appcollection/app06
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta6.outputs.tags }}
+          labels: ${{ steps.meta6.outputs.labels }}
+
+###
+# APP07
+###
+      - name: Extract metadata (tags, labels) for Docker app07
+        id: meta7
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app07
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Build and push Docker image app07
+        uses: docker/build-push-action@v2
+        with:
+          context: appcollection/app07
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta7.outputs.tags }}
+          labels: ${{ steps.meta7.outputs.labels }}
+
+###
+# APP08
+###
+
+      - name: Extract metadata (tags, labels) for Docker app08
+        id: meta8
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app08
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Build and push Docker image app08
+        uses: docker/build-push-action@v2
+        with:
+          context: appcollection/app08
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta8.outputs.tags }}
+          labels: ${{ steps.meta8.outputs.labels }}
