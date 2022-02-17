@@ -1,8 +1,12 @@
-name: Create and publish a Docker images into ghcr.io
+name: Create and push images to ghcr.io
 
 on:
-  push:
-    branches: ['main']
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - app[0-9][0-9]/**
 
 env:
   REGISTRY: ghcr.io
@@ -37,23 +41,7 @@ jobs:
         with:
           context: app01
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app01:latest
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build and push Docker image app02
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with: 
-          context: app02
-          push: true 
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app02:latest
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build and push Docker image app03
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with: 
-          context: app03
-          push: true 
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app03:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app01-$GITHUB_SHA:latest
           labels: ${{ steps.meta.outputs.labels }}
 
 
