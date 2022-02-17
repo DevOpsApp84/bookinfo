@@ -1,12 +1,18 @@
 name: Create and push images to ghcr.io
 
 on:
-
-  pull_request:
+  push:
     branches:
-      - main
-    paths:
-      - app[0-9][0-9]/**
+      — '*'
+    tags:
+      — '*'
+  pull_request:
+
+  #pull_request:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - app[0-9][0-9]/**
 
 env:
   REGISTRY: ghcr.io
