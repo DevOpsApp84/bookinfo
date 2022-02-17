@@ -41,7 +41,8 @@ jobs:
         with:
           context: app01
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app01-$GITHUB_SHA:latest
+          #tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app01-$GITHUB_SHA:latest
+          tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
 
