@@ -16,3 +16,5 @@ Structure:
     ├── home.html
     └── template.html
 ```
+
+### Release
