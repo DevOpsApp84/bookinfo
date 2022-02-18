@@ -8,7 +8,7 @@ body {
  * Formatting the header area
  */
 header {
-  background-color: #ff00aa;
+  background-color: #2804f5;
   height: 35px;
   width: 100%;
   opacity: .9;
@@ -34,14 +34,14 @@ header h1.logo:hover {
 }
 div.home {
   padding: 10px 0 30px 0;
-  background-color: #58b9f1;
+  background-color: #dce6b1;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
 }
 div.about {
   padding: 10px 0 30px 0;
-  background-color: #58b9f1;
+  background-color: #dce6b1;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
@@ -58,7 +58,7 @@ h3 {
   margin-top: 30px;
   text-align: center;
   letter-spacing: -1px;
-  color: #999;
+  color: #199;
 }
 .menu {
   float: right;
@@ -71,6 +71,6 @@ h3 {
   margin-left: 35px;
 }
 .menu li a {
-  color: #444;
+  color: #844;
   text-decoration: none;
 }
